@@ -1,5 +1,9 @@
 " vundle 环境设置
-filetype off
+"filetype off
+syntax enable
+syntax on
+
+
 set rtp+=~/.vim/bundle/Vundle.vim
 " vundle 管理的插件列表必须位于 vundle#begin() 和 vundle#end() 之间
 call vundle#begin()
@@ -15,5 +19,8 @@ call vundle#end()
 filetype plugin indent on
 
 " conf
+" set t_Co=256
+set background=dark
+
 colorscheme molokai
 
