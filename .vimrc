@@ -15,5 +15,10 @@ call vundle#end()
 filetype plugin indent on
 
 " conf
+set number
 colorscheme molokai
 
+" NERDTree config
+map <F2> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
+" autocmd vimenter * NERDTree " auto open NERDTree
