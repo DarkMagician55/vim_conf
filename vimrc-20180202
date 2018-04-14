@@ -1,0 +1,153 @@
+" vundle 环境设置
+"filetype off
+"syntax enable
+syntax on
+filetyp on
+filetype plugin on
+
+let mapleader = ","
+
+set rtp+=~/.vim/bundle/Vundle.vim
+" vundle 管理的插件列表必须位于 vundle#begin() 和 vundle#end() 之间
+" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" :PluginInstall
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tomasr/molokai'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'majutsushi/tagbar'
+Plugin 'kien/ctrlp.vim'
+Bundle 'rking/ag.vim'
+Plugin 'bling/vim-airline'
+Plugin 'wakatime/vim-wakatime'
+"Plugin 'mbbill/undotree'
+"Plugin 'spf13/PIV'
+"Plugin 'spf13/vim-autoclose'
+"Plugin 'junegunn/fzf'
+"Plugin 'rizzatti/dash.vim'
+
+" 插件列表结束
+call vundle#end()
+filetype plugin indent on
+
+" conf
+" set t_Co=256
+set background=dark
+colorscheme molokai
+
+if exists('$TMUX')
+  set term=screen-256color
+endif
+
+let g:molokai_original = 1
+let g:rehash256 = 1
+"搜索高亮
+set hlsearch
+set ts=4
+
+"默认十进制
+set nrformats=
+" tagbar
+"设置tagbar使用的ctags的插件,必须要设置对  
+let g:tagbar_ctags_bin='/usr/local/Cellar/ctags/5.8_1/bin/ctags'  
+""设置tagbar的窗口宽度  
+let g:tagbar_width=30  
+"设置tagbar的窗口显示的位置,为左边  
+"let g:tagbar_left=1  
+""打开文件自动 打开tagbar  
+"autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxxi,*.php call tagbar#autoopen()  
+"映射tagbar的快捷键  
+"map <F8> :TagbarToggle<CR> 
+
+"YCM
+let g:ycm_collect_identifiers_from_tag_files = 1
+"nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+"nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+"nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+set completeopt=longest,menu
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
+let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
+
+
+" NERDTree config
+map <leader>e :NERDTreeToggle<CR>
+"map <F2> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif " 只剩树时自动退出
+"autocmd vimenter * NERDTree " auto open NERDTree
+let NERDTreeQuitOnOpen=0 "打开文件时关闭树
+let NERDTreeShowBookmarks=1 "显示书签
+
+
+set fileencoding=utf-8
+set termencoding=utf-8
+set encoding=utf-8
+
+set shortmess=atI
+set number
+set cursorline
+set shiftwidth=4
+set tabstop=4
+set number
+set autoindent
+set cindent
+set expandtab " 空格代替制表符
+set ignorecase " 搜索忽略大小写
+
+"set clipboard+=unnamed
+set novisualbell
+set showcmd
+set ruler
+"set paste
+set showmatch
+set incsearch
+set nocompatible
+set backspace=indent,eol,start
+"set backspace=2
+"增强模式中的命令行自动完成操作
+set wildmenu
+
+set foldmethod=manual
+"set foldmethod=syntax
+"set foldenable
+"set foldcolumn=0
+"setlocal foldlevel=1
+"set foldlevelstart=99
+
+"ctrlp
+let g:ctrlp_map = '<c-p>'     "hotkey Ctrl+p open ctrlp plugin
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = '0'       "disable work path mode
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif " MacOSX/Linux
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+"<Leader>f搜索MRU文件
+nmap <Leader>f :CtrlPMRUFiles<CR>
+"<Leader>b显示缓冲区文件，并可通过序号进行跳转
+nmap <Leader>b :CtrlPBuffer<CR>
+if executable('ag')
+      " Use Ag over Grep
+      set grepprg=ag\ --nogroup\ --nocolor
+      "     " Use ag in CtrlP for listing files.
+      let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+        " Ag is fast enough that CtrlP doesn't need to cache
+      let g:ctrlp_use_caching = 0
+endif
+
+"ag
+let g:ag_working_path_mode="r"
+"let g:ag_prg="<custom-ag-path-goes-here> --vimgrep"
+
+"airline
+ let g:airline#extensions#tabline#enabled = 1
+ let g:airline#extensions#tabline#buffer_nr_show = 1
+
+"undotree time macine
+"nnoremap <Leader>u :UndotreeToggle<CR>
+"if has("persistent_undo")
+"    set undodir=~/.undodir/
+"    set undofile
+"endif
+
+"set rtp+=/usr/local/opt/fzf
+
